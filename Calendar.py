@@ -80,5 +80,35 @@ def start_calendar():
 				try_again = raw_input("Try Again?  Y for Yes, N for No:  ").upper()
 				if try_again == "Y":
 					continue
-				elif try_again == "N":
+				else:
 					start = False
+			else:
+				calendar[date] = event
+				print("Succesful Add!")
+				print(calendar)
+		
+		elif user_choice == "D":
+			if len(calendar.keys()) < 1:
+				print("Calendar is empty, silly!")
+			else:
+				event = raw_input("Enter Event:  ")
+				
+				for e in calendar.keys():
+					if event == calendar[e]:
+						del calendar[e]
+						print("Successful Delete")
+						print(calendar)
+					else:
+						print("Whoops, that's not a valid date!")
+						try_again = raw_input("Try Again?  Y for Yes, N for No:  ").upper()
+						if try_again == "Y":
+							continue
+						else:
+							start = False
+		elif user_choice == "X":
+			start = False
+
+		else:
+			start = False
+					
+start_calendar()
