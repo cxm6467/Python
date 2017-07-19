@@ -3,25 +3,26 @@
 ##  user by viewing, adding, deleting and
 ##  updating events.
 ##  
-##  Language:  Python
+##  Language:  Python3
 ##  Author:    Chris Marasco
-##  Date:			 07/13/2017
-##  Modules:	 sleep, time
+##  Date:	   07/13/2017
+##  Modules:   sleep, sys and time
 """
 
 ## Add specific libraries from time
 from time import sleep, strftime
+import sys
 
 ## User's First name
 USER_FIRST_NAME = "Chris"
 
 ## Dict for the Cal
-calendar = []
+calendar = {}
 
 ## Function for displaying welcome message
 def welcome():
 	## Welcome Message
-	print("Welcome, ") + USER_FIRST_NAME + "."
+	print("Welcome, ", USER_FIRST_NAME, ".")
 		
 	## Wait a second before printing date/time
 	sleep(1)
@@ -34,7 +35,7 @@ def welcome():
 	
 	## Ask user for input
 	
-	print("What would you like to do, "+USER_FIRST_NAME+"?")
+	print("What would you like to do, ", USER_FIRST_NAME, "?")
  
 def start_calendar():
 	## Welcome User
@@ -45,7 +46,7 @@ def start_calendar():
 	
 	## Use above so user can control exit
 	while(start):
-		user_choice = raw_input("A to Add, U to Update, V to View, D to Delete, X to Exit:  ").upper()
+		user_choice = input("A to Add, U to Update, V to View, D to Delete, X to Exit:  ").upper()
 		
 		## View Calendar
 		if user_choice == "V":
@@ -58,8 +59,8 @@ def start_calendar():
 			##  update Calendar
 		elif user_choice == "U":
 			#Update Info
-			date = raw_input("What date?  ")
-			update = raw_input("Enter the update:  ")
+			date = input("What date?  ")
+			update = input("Enter the update:  ")
 				
 			#Update calendar
 			calendar[date] = update
@@ -71,13 +72,13 @@ def start_calendar():
 		## Add Info
 		elif user_choice == "A":
 			## Add Info
-			event = raw_input("Enter Event:  ")
-			date = raw_input("Enter Date (MM/DD/YYYY):  ")
+			event = input("Enter Event:  ")
+			date = input("Enter Date (MM/DD/YYYY):  ")
 			if len(date) > 10   or (  int(date[6:])  < int(strftime("%Y")) ):
 
 				print("You entered an invalid date!")
 						
-				try_again = raw_input("Try Again?  Y for Yes, N for No:  ").upper()
+				try_again = input("Try Again?  Y for Yes, N for No:  ").upper()
 				if try_again == "Y":
 					continue
 				else:
@@ -91,16 +92,16 @@ def start_calendar():
 			if len(calendar.keys()) < 1:
 				print("Calendar is empty, silly!")
 			else:
-				event = raw_input("Enter Event:  ")
+				event = input("Enter Event:  ")
 				
-				for e in calendar.keys():
+				for e in calendar.copy():
 					if event == calendar[e]:
 						del calendar[e]
 						print("Successful Delete")
 						print(calendar)
 					else:
 						print("Whoops, that's not a valid date!")
-						try_again = raw_input("Try Again?  Y for Yes, N for No:  ").upper()
+						try_again = input("Try Again?  Y for Yes, N for No:  ").upper()
 						if try_again == "Y":
 							continue
 						else:
